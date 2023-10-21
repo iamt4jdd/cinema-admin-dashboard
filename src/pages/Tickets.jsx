@@ -2,7 +2,7 @@ import sampleData from "~/data/sampleData";
 
 const Tickets = () => {
     return (
-        <div className="relative overflow-x-auto mx-auto my-auto max-h-[650px] w-[900px] overflow-y-auto"> 
+        <div className="relative overflow-x-auto mx-auto my-auto max-h-[650px] w-[900px] overflow-y-auto">
             <table className="w-full text-sm text-left text-black dark:text-gray-400">
                 <thead className="text-xs text-black uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
