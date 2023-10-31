@@ -1,12 +1,8 @@
-const TextField = ({
-  title,
-  inputRef,
-  value,
-  name,
-  accept,
-  event,
-  type = "text",
-}) => {
+
+
+
+
+const TextField = ({ title, inputRef, value, name, event, type = "text" }) => {
   return (
     <>
       <label
@@ -17,9 +13,9 @@ const TextField = ({
       </label>
       <input
         ref={inputRef}
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+         focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         type={type}
-        accept={accept}
         name={name}
         placeholder={title}
         value={value}

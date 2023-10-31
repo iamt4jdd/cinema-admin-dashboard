@@ -3,16 +3,48 @@ import TextField from "./TextField";
 import images from "~/assets";
 
 const PostMovie = () => {
+
+  const [movieData, setMovieData] = useState({
+    title : "",
+    cost : "",
+    genre : "",
+    region : "",
+    runTime : "",
+    thumbnail : "",
+})
+
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleModal = () => {
-    setIsOpen(!isOpen);
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    
+  }
 
+  const handleInputChange = (e) => {
+
+    const { value, type, name } = e.target
+
+    if(type === "file") {
+        const file = e.target.files[0];
+        setMovieData({
+            ...movieData,
+            thumbnail: file,
+        });
+        
+    } else {
+        
+      setMovieData({
+          ...movieData,
+          [name]: value
+        });
+    }
+    
+    console.log(movieData);
+}
   return (
     <div>
       <button
-        onClick={toggleModal}
+        onClick={() => setIsOpen(!isOpen)}
         type="button"
         className="mb-4 w-52 h-12 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none 
           focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
@@ -32,7 +64,7 @@ const PostMovie = () => {
             <div className="relative w-full max-w-md max-h-full">
               <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <button
-                  onClick={toggleModal}
+                  onClick={() => setIsOpen(!isOpen)}
                   type="button"
                   className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                 >
@@ -42,13 +74,13 @@ const PostMovie = () => {
                   <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
                     Add a new movie
                   </h3>
-                  <form className="grid gap-3" action="#">
-                    <TextField title="Title" />
-                    <TextField title="Cost" />
-                    <TextField title="Genre" />
-                    <TextField title="Region" />
-                    <TextField title="Run Time" />
-                    <TextField title="Thumbnail" type="file" accept="image/*" />
+                  <form className="grid gap-3" onSubmit={handleSubmit}>
+                    <TextField title="Title" name="title" event={handleInputChange} />
+                    <TextField title="Cost" name="cost" event={handleInputChange} />
+                    <TextField title="Genre" name="genre" event={handleInputChange} />
+                    <TextField title="Region" name="region" event={handleInputChange} />
+                    <TextField title="Run Time" name="runtime" event={handleInputChange} />
+                    <TextField title="Thumbnail" type="file" name="thumbnail" event={handleInputChange} accept="image/*" />
                     <button
                       type="submit"
                       className="w-full mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
