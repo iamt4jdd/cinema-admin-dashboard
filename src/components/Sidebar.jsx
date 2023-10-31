@@ -25,7 +25,7 @@ const Sidebar = () => {
                 <Route path="/tickets" element={<Tickets />} />
             </Routes>
         </Router>
-    );
+    );  
 };
 
 export default Sidebar;
