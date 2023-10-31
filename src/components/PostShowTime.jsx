@@ -32,7 +32,7 @@ const PostShowTime = () => {
     }
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = async (e) => {
     const { value, name } = e.target;
 
     setShowTimeData({

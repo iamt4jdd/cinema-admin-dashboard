@@ -1,46 +1,70 @@
 import { useState } from "react";
 import TextField from "./TextField";
 import images from "~/assets";
+import axios from "~/api/axios";
 
 const PostMovie = () => {
-
   const [movieData, setMovieData] = useState({
-    title : "",
-    cost : "",
-    genre : "",
-    region : "",
-    runTime : "",
-    thumbnail : "",
-})
+    title: "",
+    cost: "",
+    genre: "",
+    region: "",
+    runTime: "",
+    thumbnail: "",
+  });
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleInputChange = (e) => {
+    const postData = new FormData();
 
-    const { value, type, name } = e.target
+    postData.append("title", movieData.title);
+    postData.append("cost", movieData.cost);
+    postData.append("genre", movieData.genre);
+    postData.append("region", movieData.region);
+    postData.append("runTime", movieData.runTime);
+    postData.append("thumbnail", movieData.thumbnail);
 
-    if(type === "file") {
-        const file = e.target.files[0];
-        setMovieData({
-            ...movieData,
-            thumbnail: file,
-        });
-        
-    } else {
-        
+    try {
+      await axios.post("http://localhost:5555/movie", postData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
       setMovieData({
-          ...movieData,
-          [name]: value
-        });
+        title: "",
+        cost: "",
+        genre: "",
+        region: "",
+        runTime: "",
+        thumbnail: "",
+      });
+    } catch (error) {
+      console.log("Error submitting form: ", error);
     }
-    
+  };
+
+  const handleInputChange = async (e) => {
+    const { value, type, name } = e.target;
+
+    if (type === "file") {
+      const file = e.target.files[0];
+      setMovieData({
+        ...movieData,
+        thumbnail: file,
+      });
+    } else {
+      setMovieData({
+        ...movieData,
+        [name]: value,
+      });
+    }
+
     console.log(movieData);
-}
+  };
   return (
     <div>
       <button
@@ -75,12 +99,43 @@ const PostMovie = () => {
                     Add a new movie
                   </h3>
                   <form className="grid gap-3" onSubmit={handleSubmit}>
-                    <TextField title="Title" name="title" event={handleInputChange} />
-                    <TextField title="Cost" name="cost" event={handleInputChange} />
-                    <TextField title="Genre" name="genre" event={handleInputChange} />
-                    <TextField title="Region" name="region" event={handleInputChange} />
-                    <TextField title="Run Time" name="runtime" event={handleInputChange} />
-                    <TextField title="Thumbnail" type="file" name="thumbnail" event={handleInputChange} accept="image/*" />
+                    <TextField
+                      title="Title"
+                      name="title"
+                      value={movieData.title}
+                      event={handleInputChange}
+                    />
+                    <TextField
+                      title="Cost"
+                      name="cost"
+                      value={movieData.cost}
+                      event={handleInputChange}
+                    />
+                    <TextField
+                      title="Genre"
+                      name="genre"
+                      value={movieData.genre}
+                      event={handleInputChange}
+                    />
+                    <TextField
+                      title="Region"
+                      name="region"
+                      value={movieData.region}
+                      event={handleInputChange}
+                    />
+                    <TextField
+                      title="Run Time"
+                      name="runTime"
+                      value={movieData.runTime}
+                      event={handleInputChange}
+                    />
+                    <TextField
+                      title="Thumbnail"
+                      type="file"
+                      name="thumbnail"
+                      event={handleInputChange}
+                      accept="image/*"
+                    />
                     <button
                       type="submit"
                       className="w-full mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
