@@ -5,6 +5,7 @@ import images from "~/assets";
 import axios from "~/api/axios";
 
 const PostShowTime = () => {
+  const [message, setMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [showTimeData, setShowTimeData] = useState({
     movieId: "",
@@ -16,19 +17,18 @@ const PostShowTime = () => {
     e.preventDefault();
 
     try {
-      await axios.post(
-        "http://localhost:5555/showtime/add",
-        showTimeData
-      );
+      await axios.post("http://localhost:5555/showtime/add", showTimeData);
+
+      setMessage("Add Showtime Successfully");
 
       setShowTimeData({
         movieId: "",
         showingDate: "",
         startTime: "",
       });
-      
+
     } catch (error) {
-      console.log("Error submitting form: ", error);
+      console.err("Error submitting form: ", error);
     }
   };
 
@@ -39,8 +39,6 @@ const PostShowTime = () => {
       ...showTimeData,
       [name]: value,
     });
-
-    console.log(showTimeData);
   };
 
   return (
@@ -73,7 +71,20 @@ const PostShowTime = () => {
                   <img src={images.close} alt="close" />
                 </button>
                 <div className="px-6 py-6 lg:px-8">
-                  <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+                  {message && (
+                    <div className="flex justify-center">
+                      <div
+                        className={`absolute top-2 ${
+                          message === "Project already exists"
+                            ? `text-red-500`
+                            : "text-green-600"
+                        } mb-4 text-center`}
+                      >
+                        {message}
+                      </div>
+                    </div>
+                  )}
+                  <h3 className="mt-2 mb-4 text-xl font-medium text-gray-900 dark:text-white">
                     Add a new ShowTime
                   </h3>
                   <form className="grid gap-3" onSubmit={handleSubmit}>

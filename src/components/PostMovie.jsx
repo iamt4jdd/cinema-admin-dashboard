@@ -4,6 +4,7 @@ import images from "~/assets";
 import axios from "~/api/axios";
 
 const PostMovie = () => {
+  const [message, setMessage] = useState("");
   const [movieData, setMovieData] = useState({
     title: "",
     cost: "",
@@ -34,6 +35,8 @@ const PostMovie = () => {
         },
       });
 
+      setMessage("Add Movie Successfully");
+
       setMovieData({
         title: "",
         cost: "",
@@ -62,8 +65,6 @@ const PostMovie = () => {
         [name]: value,
       });
     }
-
-    console.log(movieData);
   };
   return (
     <div>
@@ -95,7 +96,20 @@ const PostMovie = () => {
                   <img src={images.close} alt="close" />
                 </button>
                 <div className="px-6 py-6 lg:px-8">
-                  <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+                  {message && (
+                    <div className="flex justify-center">
+                      <div
+                        className={`absolute top-2 ${
+                          message === "Project already exists"
+                            ? `text-red-500`
+                            : "text-green-600"
+                        } mb-4 text-center`}
+                      >
+                        {message}
+                      </div>
+                    </div>
+                  )}
+                  <h3 className="mt-2 mb-4 text-xl font-medium text-gray-900 dark:text-white">
                     Add a new movie
                   </h3>
                   <form className="grid gap-3" onSubmit={handleSubmit}>

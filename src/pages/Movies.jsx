@@ -12,7 +12,7 @@ const Movies = () => {
   return (
     <div className="flex flex-col w-full">
       <div className="relative overflow-x-auto mx-auto my-10 max-h-[620px] w-[900px] overflow-y-auto">
-        <table className="w-full text-sm text-left text-black dark:text-gray-400 text-center">
+        <table className="w-full text-sm text-black dark:text-gray-400 text-center">
           <thead className="sticky top-0 text-xs text-black uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
