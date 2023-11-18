@@ -32,9 +32,6 @@ const Showtime = () => {
               <th scope="col" className="px-6 py-3 text-center">
                 End Time
               </th>
-              <th scope="col" className="px-6 py-3 text-center">
-                Current Quantity
-              </th>
             </tr>
           </thead>
           <tbody>

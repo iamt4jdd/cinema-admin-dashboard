@@ -17,7 +17,7 @@ const PostShowTime = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:5555/showtime/add", showTimeData);
+      await axios.post("http://cinema.pantech.vn:5555/showtime/add", showTimeData);
 
       setMessage("Add Showtime Successfully");
 
