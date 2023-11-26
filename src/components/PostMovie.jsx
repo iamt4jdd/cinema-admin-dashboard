@@ -29,7 +29,7 @@ const PostMovie = () => {
     postData.append("thumbnail", movieData.thumbnail);
 
     try {
-      await axios.post("http://localhost:5555/movie", postData, {
+      await axios.post("http://cinema.pantech.vn:5555/movie", postData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
