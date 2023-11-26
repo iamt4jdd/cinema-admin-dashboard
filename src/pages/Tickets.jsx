@@ -28,6 +28,9 @@ const Tickets = () => {
                         <th scope="col" className="px-6 py-3">
                             Seat
                         </th>
+                        <th scope="col" className="px-6 py-3">
+                            Purchase Date
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,6 +47,9 @@ const Tickets = () => {
                             </td>
                             <td className="px-6 py-4">
                                 {ticket.seatNumber}
+                            </td>
+                            <td className="px-6 py-4">
+                                {ticket.purchaseDate}
                             </td>
                         </tr>
                     ))}
