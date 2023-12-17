@@ -4,14 +4,18 @@ import path from "node:path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    resolve: {
-        alias: {
-            "~": path.resolve(__dirname, "./src"),
-        },
+  resolve: {
+    alias: {
+      "~": path.resolve(__dirname, "./src"),
     },
-    server: {
-        port: 8080,
-        host: "0.0.0.0",
+  },
+  plugins: [react()],
+  server: {
+    watch: {
+      usePolling: true,
     },
-    plugins: [react()],
+    host: true, // needed for the Docker Container port mapping to work
+    strictPort: true,
+    port: 3000, // you can replace this port with any port
+  },
 });
