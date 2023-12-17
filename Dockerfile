@@ -13,7 +13,7 @@ RUN npm run build
 
 # COPY --from=builder deploy/nginx/nginx.conf /etc/nginx/conf.d
 
-EXPOSE 5000
+EXPOSE 3000
 
 CMD ["npm", "run", "dev"]
 # CMD ["nginx", "-g", "daemon off;"]
